@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:15
+    container_name: fidc_db
+    ports: ["5432:5432"]
+    environment:
+      POSTGRES_USER: fidc
+      POSTGRES_PASSWORD: fidc
+      POSTGRES_DB: fidc
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
