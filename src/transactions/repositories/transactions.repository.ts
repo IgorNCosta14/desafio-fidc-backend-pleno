@@ -11,13 +11,10 @@ export class TransactionsRepository {
     ) { }
 
     async saveMany(items: Partial<Transaction>[]): Promise<Transaction[]> {
-        return await this.repo.manager.transaction(async (manager: EntityManager) => {
+        return await this.repo.manager.transaction(async (manager) => {
+            const repo = manager.getRepository(Transaction);
 
-            const txRepo = manager.getRepository(Transaction);
-
-            const created = txRepo.create(items);
-
-            return await txRepo.save(created);
+            return await repo.save(items, { chunk: 500 });
         });
     }
 }
