@@ -2,9 +2,7 @@ import { BadRequestException, CallHandler, ExecutionContext, NestInterceptor, mi
 import { extname } from 'path';
 import { Observable } from 'rxjs';
 
-type Allowed = string[];
-
-export function ValidateFileExtensionInterceptor(allowed: Allowed) {
+export function ValidateFileExtensionInterceptor(allowed: string[]) {
     const allowedSet = new Set(
         allowed.map(e => (e.startsWith('.') ? e.toLowerCase() : `.${e.toLowerCase()}`))
     );

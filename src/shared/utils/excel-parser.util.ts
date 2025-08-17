@@ -1,12 +1,21 @@
-import * as XLSX from 'xlsx';
-
 export class ExcelParserUtil {
-    static parse(buffer: Buffer): any[] {
-        const workbook = XLSX.read(buffer, { type: 'buffer' });
-        const sheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[sheetName];
-        const json = XLSX.utils.sheet_to_json(worksheet, { defval: null });
+    static excelSerialToDate(value: number | string | Date | null | undefined): Date | null {
+        if (value === null || value === undefined || value === '') return null;
+        if (value instanceof Date && !isNaN(value.getTime())) return value;
 
-        return json;
+        if (typeof value === 'string') {
+            const d = new Date(value);
+
+            return isNaN(d.getTime()) ? null : d;
+        }
+
+        if (typeof value === 'number') {
+            const excelEpoch = new Date(Date.UTC(1899, 11, 30));
+            const ms = Math.round(value * 24 * 60 * 60 * 1000);
+
+            return new Date(excelEpoch.getTime() + ms);
+        }
+
+        return null;
     }
 }

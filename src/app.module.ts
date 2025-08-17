@@ -16,7 +16,7 @@ import { TransactionsModule } from './transactions/transactions.module';
         password: cfg.get<string>('DB_PASSWORD'),
         database: cfg.get<string>('DB_DATABASE'),
         autoLoadEntities: true,
-        synchronize: false,
+        synchronize: true,
         ssl: cfg.get('DB_SSL') === 'true' ? { rejectUnauthorized: false } : false,
         namingStrategy: undefined,
         logging: ['error', 'schema'],

@@ -1333,6 +1333,13 @@
   resolved "https://registry.yarnpkg.com/@types/validator/-/validator-13.15.2.tgz#ee533a20ab977df36917a454754c7e0df4aa6f8f"
   integrity sha512-y7pa/oEJJ4iGYBxOpfAKn5b9+xuihvzDVnC/OSvlVnGxVg0pOqmjiMafiJ1KVNQEaPZf9HsEp5icEwGg8uIe5Q==
 
+"@types/xlsx@^0.0.36":
+  version "0.0.36"
+  resolved "https://registry.yarnpkg.com/@types/xlsx/-/xlsx-0.0.36.tgz#b5062003e5c5374ab4f08fdd3bf69da4d4013af8"
+  integrity sha512-mvfrKiKKMErQzLMF8ElYEH21qxWCZtN59pHhWGmWCWFJStYdMWjkDSAy6mGowFxHXaXZWe5/TW7pBUiWclIVOw==
+  dependencies:
+    xlsx "*"
+
 "@types/yargs-parser@*":
   version "21.0.3"
   resolved "https://registry.npmjs.org/@types/yargs-parser/-/yargs-parser-21.0.3.tgz"
@@ -5438,7 +5445,7 @@ write-file-atomic@^5.0.1:
     imurmurhash "^0.1.4"
     signal-exit "^4.0.1"
 
-xlsx@^0.18.5:
+xlsx@*, xlsx@^0.18.5:
   version "0.18.5"
   resolved "https://registry.yarnpkg.com/xlsx/-/xlsx-0.18.5.tgz#16711b9113c848076b8a177022799ad356eba7d0"
   integrity sha512-dmg3LCjBPHZnQp5/F/+nnTa+miPJxUXB6vtk42YjBBKayDNagxGEeIdWApkYPOf3Z3pm3k62Knjzp7lMeTEtFQ==
