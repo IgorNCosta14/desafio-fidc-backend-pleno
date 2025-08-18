@@ -3,8 +3,8 @@ import { plainToInstance } from 'class-transformer';
 import { validateSync } from 'class-validator';
 import { FileParser } from '../file-parsers/file-parser.interface';
 import { XlsxParser } from '../file-parsers/xlsx.parser';
-import { TransactionDto } from 'src/transactions/dtos/transaction.dto';
-import { toBooleanStrict, toIsoDateStrict, toNumberStrict } from 'src/shared/utils/normalizers.util';
+import { TransactionDto } from '../../transactions/dtos/transaction.dto';
+import { toBooleanStrict, toIsoDateStrict, toNumberStrict } from '../../shared/utils/normalizers.util';
 
 @Injectable()
 export class ParseAndValidateFilePipe implements PipeTransform<Express.Multer.File, { raw: any[]; formatted: TransactionDto[] }> {
