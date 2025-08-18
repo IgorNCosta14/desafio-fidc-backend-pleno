@@ -1,48 +1,5 @@
 import { IsBoolean, IsNumber, IsOptional, IsString, Matches } from 'class-validator';
 
-// export function excelSerialToDate(value: any): Date | null {
-//     if (value === null || value === undefined || value === '') return null;
-
-//     if (value instanceof Date && !isNaN(value.getTime())) return value;
-
-//     if (typeof value === 'string') {
-//         const date = new Date(value);
-
-//         return isNaN(date.getTime()) ? null : date;
-//     }
-
-//     if (typeof value === 'number') {
-//         const excelEpoch = new Date(Date.UTC(1899, 11, 30));
-//         const ms = Math.round(value * 24 * 60 * 60 * 1000);
-
-//         return new Date(excelEpoch.getTime() + ms);
-//     }
-//     return null;
-// }
-
-// export function toBoolean(value: any): boolean | null {
-//     if (value === null || value === undefined || value === '') return null;
-//     if (typeof value === 'boolean') return value;
-//     if (typeof value === 'number') return value !== 0;
-//     if (typeof value === 'string') {
-//         const v = value.trim().toLowerCase();
-//         if (v === 'true' || v === '1' || v === 'yes') return true;
-//         if (v === 'false' || v === '0' || v === 'no') return false;
-//     }
-//     return null;
-// }
-
-// export function toNumber(value: any): number | null {
-//     if (value === null || value === undefined || value === '') return null;
-//     if (typeof value === 'number') return value;
-//     if (typeof value === 'string') {
-//         const normalized = value.replace(/\./g, '').replace(',', '.');
-//         const num = Number(normalized);
-//         return isNaN(num) ? null : num;
-//     }
-//     return null;
-// }
-
 const ISO_DATE_ONLY = /^\d{4}-\d{2}-\d{2}$/;
 
 export class TransactionDto {
