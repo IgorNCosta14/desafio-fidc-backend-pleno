@@ -1,13 +1,12 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { Transaction } from '../entities/transaction.entity';
-import { TransactionDto } from '../dtos/transaction.dto';
 import { TransactionsRepository } from '../repositories/transactions.repository';
+import { TransactionDto } from '../dtos/transaction.dto';
 
 function dateOnlyToUTC(dateStr: string | undefined | null): Date | null {
     if (!dateStr) return null;
-
     const [y, m, d] = dateStr.split('-').map(Number);
-    return new Date(Date.UTC(y, (m ?? 1) - 1, d ?? 1));
+    return new Date(y, (m ?? 1) - 1, d ?? 1)
 }
 
 function amountToDbString(n: number): string {
@@ -33,11 +32,13 @@ export class TransactionsService {
                 endDate: dateOnlyToUTC(row.end_date ?? null)
             }));
 
-            const saved = await this.transactionsRepository.saveMany(entities);
-
-            return saved;
+            return await this.transactionsRepository.saveMany(entities);
         } catch (err) {
-            throw new InternalServerErrorException('Failed to persist transactions');
+            throw new InternalServerErrorException('Failed to save transactions');
         }
+    }
+
+    async getAllTransactions(): Promise<Transaction[]> {
+        return await this.transactionsRepository.getAll();
     }
 }

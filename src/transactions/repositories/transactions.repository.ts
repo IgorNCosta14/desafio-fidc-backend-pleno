@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, EntityManager } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Transaction } from '../entities/transaction.entity';
 
 @Injectable()
@@ -16,5 +16,9 @@ export class TransactionsRepository {
 
             return await repo.save(items, { chunk: 500 });
         });
+    }
+
+    async getAll(): Promise<Transaction[]> {
+        return await this.repo.find();
     }
 }
