@@ -48,7 +48,6 @@ export class TransactionsController {
                             isCredit: true,
                             startDate: '2025-07-01T00:00:00.000Z',
                             endDate: '2025-12-31T00:00:00.000Z',
-                            // ...demais campos/relacionamentos da sua entidade
                         },
                     ],
                 },
