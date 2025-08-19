@@ -57,9 +57,7 @@ describe('TransactionsService', () => {
                 },
             ];
 
-            // retorna o mesmo que recebeu (com ids simulados) para facilitar as asserções
             repo.saveMany.mockImplementation(async (entities: any[]) => {
-                // asserções no payload que o service enviou para o repo
                 expect(entities).toHaveLength(2);
 
                 expect(entities[0]).toMatchObject({
@@ -68,7 +66,7 @@ describe('TransactionsService', () => {
                     abbreviatedDescription: 'Compra a Vista',
                     isCredit: false,
                 });
-                expect(entities[0].dueDate).toEqual(new Date(2025, 2, 10));      // mês-1
+                expect(entities[0].dueDate).toEqual(new Date(2025, 2, 10));
                 expect(entities[0].actualDueDate).toEqual(new Date(2025, 2, 10));
                 expect(entities[0].creationDate).toEqual(new Date(2025, 1, 17));
                 expect(entities[0].referenceDate).toEqual(new Date(2025, 1, 14));
@@ -83,7 +81,6 @@ describe('TransactionsService', () => {
                 });
                 expect(entities[1].endDate).toBeNull();
 
-                // simula retorno do repositório como Transaction[]
                 return entities.map((e, i) => ({ id: `t${i + 1}`, ...e })) as any;
             });
 

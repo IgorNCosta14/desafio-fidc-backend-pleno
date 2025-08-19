@@ -128,7 +128,7 @@ describe('ParseAndValidateFilePipe', () => {
         (pipe as any).parsers = [stubParser(rows)];
 
         const validateMock = jest.spyOn(classValidator, 'validateSync' as any)
-            .mockReturnValueOnce([]) // row 1
+            .mockReturnValueOnce([])
             .mockReturnValueOnce([
                 { property: 'reference_date', constraints: { isDateString: 'must be a valid ISO 8601 date string' } },
                 { property: 'amount', constraints: { isNumberString: 'must be a number string' } },
