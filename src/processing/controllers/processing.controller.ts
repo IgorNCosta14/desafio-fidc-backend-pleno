@@ -1,4 +1,4 @@
-import { Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { ProcessingService } from '../services/processing.service';
 import { TransactionsService } from 'src/transactions/services/transactions.service';
 import { ApiOkResponse, ApiResponse, ApiOperation } from '@nestjs/swagger';
@@ -58,6 +58,46 @@ export class ProcessingController {
             statusCode: HttpStatus.OK,
             message: 'Data processed successfully!',
             data
+        };
+    }
+
+    @Get('/')
+    @HttpCode(HttpStatus.OK)
+    @ApiOperation({
+        summary: 'Lista os registros processados',
+        description:
+            'Retorna todos os registros já processados contendo dueDate, amount, date, description, ccb e tipo.',
+    })
+    @ApiOkResponse({
+        description: 'Processed outputs retrieved successfully.',
+        schema: {
+            example: [
+                {
+                    dueDate: '2025-03-10',
+                    amount: -86.27,
+                    date: '2025-03-11',
+                    description: 'CCB',
+                    ccb: null,
+                    tipo: 'Brasil Card',
+                },
+                {
+                    dueDate: '2025-03-10',
+                    amount: 86.27,
+                    date: '2025-03-11',
+                    description: 'CCB 1',
+                    ccb: 1,
+                    tipo: 'Fundo',
+                },
+            ],
+        },
+    })
+    async listProcessedOutputs() {
+        const data = await this.processingService.listProcessedOutputs();
+
+        return {
+            statusCode: HttpStatus.OK,
+            message: 'Processed outputs retrieved successfully!',
+            data,
         };
     }
 }

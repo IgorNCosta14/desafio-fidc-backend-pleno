@@ -11,8 +11,33 @@ export class ProcessedOutputRepository {
         private readonly repo: Repository<ProcessedOutput>,
     ) { }
 
-    async findAll(): Promise<ProcessedOutput[]> {
-        return this.repo.find();
+    async findAll(): Promise<{
+        dueDate: string;
+        amount: number;
+        date: string;
+        description: string;
+        ccb: number | null;
+        tipo: string;
+    }[]> {
+        const rows = await this.repo.createQueryBuilder('po')
+            .select([
+                'po.dueDate AS "dueDate"',
+                'po.amount AS "amount"',
+                'po.date AS "date"',
+                'po.description AS "description"',
+                'po.ccb AS "ccb"',
+                'po.tipo AS "tipo"',
+            ])
+            .orderBy('po.dueDate', 'ASC')
+            .addOrderBy('po.date', 'ASC')
+            .getRawMany();
+
+        return rows.map((r) => ({
+            ...r,
+            dueDate: r.dueDate ? r.dueDate.toISOString().split('T')[0] : null,
+            date: r.date ? r.date.toISOString().split('T')[0] : null,
+            amount: Number(r.amount),
+        }));
     }
 
     async saveMany(rows: CreateProcessedOutputDto[]): Promise<ProcessedOutput[]> {

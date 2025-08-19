@@ -4,6 +4,7 @@ import { Transaction } from '../../transactions/entities/transaction.entity';
 import { CreateProcessedOutputDto } from '../dtos/create-processed-output.dto';
 import { ProcessedOutputRepository } from '../repositories/processed-output.repository';
 import { Ccb, Money, MonthlyInvoice, OutputRow, RawLine } from '../types/processing.type';
+import { ProcessedOutput } from '../entities/processed-output.entity';
 
 @Injectable()
 export class ProcessingService {
@@ -514,7 +515,7 @@ export class ProcessingService {
         return t;
     }
 
-    async saveOutputTable(outputTable: OutputRow[]) {
+    async saveOutputTable(outputTable: OutputRow[]): Promise<ProcessedOutput[]> {
         const payload: CreateProcessedOutputDto[] = outputTable.map((r) => ({
             dueDate: r.dueDate,
             amount: r.amount,
@@ -527,7 +528,14 @@ export class ProcessingService {
         return this.processedOutputRepository.saveMany(payload);
     }
 
-    async listProcessedOutputs() {
+    async listProcessedOutputs(): Promise<{
+        dueDate: string;
+        amount: number;
+        date: string;
+        description: string;
+        ccb: number | null;
+        tipo: string;
+    }[]> {
         return this.processedOutputRepository.findAll();
     }
 }
