@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TransactionsModule } from './transactions/transactions.module';
+import { ProcessingModule } from './processing/processing.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { TransactionsModule } from './transactions/transactions.module';
         logging: ['error', 'schema'],
       }),
     }),
-    TransactionsModule
+    TransactionsModule,
+    ProcessingModule
   ],
   controllers: [],
   providers: [],

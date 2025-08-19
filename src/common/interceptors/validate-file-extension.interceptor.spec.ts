@@ -56,7 +56,7 @@ describe('ValidateFileExtensionInterceptor', () => {
     });
 
     it('should pass through when extension is allowed (case-insensitive on file name)', async () => {
-        const InterceptorClass = ValidateFileExtensionInterceptor(['xlsx']); // sem ponto também funciona
+        const InterceptorClass = ValidateFileExtensionInterceptor(['xlsx']);
         const interceptor = new InterceptorClass();
 
         const ctx = makeCtx({ originalname: 'INPUT.XLSX' } as any);
@@ -70,7 +70,7 @@ describe('ValidateFileExtensionInterceptor', () => {
     });
 
     it('should normalize allowed list (with or without dot) and compare lowercase', async () => {
-        const InterceptorClass = ValidateFileExtensionInterceptor(['.XLSX', 'Csv']); // mistura de casos
+        const InterceptorClass = ValidateFileExtensionInterceptor(['.XLSX', 'Csv']);
         const interceptor = new InterceptorClass();
 
         const ctx1 = makeCtx({ originalname: 'file.csv' } as any);
